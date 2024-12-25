@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        BigInt      @id @default(autoincrement())
+  email     String      @unique
+  password  String
+  name      String
+  role      Role        @default(USER)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  sessions  Session[]
+  tokens    Token[]
+  purchases Purchases[]
+
+  @@map("users")
+}
+
+model Session {
+  id        BigInt   @id @default(autoincrement())
+  userId    BigInt
+  token     String   @unique
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@map("sessions")
+}
+
+model Token {
+  id            BigInt @id @default(autoincrement())
+  name          String
+  symbol        String
+  initialSupply Int
+  tokenId       String
+  ownerId       BigInt
+  owner         User   @relation(fields: [ownerId], references: [id])
+
+  @@map("tokens")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+model Purchases {
+  id            BigInt    @id @default(autoincrement())
+  client_id     BigInt?
+  purchase_time DateTime? @default(now()) @db.Timestamptz(6)
+  clients       User?     @relation(fields: [client_id], references: [id])
+
+  @@map("purchases")
+}
