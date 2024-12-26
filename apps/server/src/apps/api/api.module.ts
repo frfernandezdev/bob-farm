@@ -5,6 +5,8 @@ import Joi from "joi";
 import { LoggerModule } from "@/shared/infrastructure/logger/logger.module";
 import { ApiAuthModule } from "./auth/auth.module";
 import { ApiPurchasesModule } from "./purchase/purchase.module";
+import { seconds, ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
+import { APP_GUARD } from "@nestjs/core";
 
 @Module({
   imports: [
@@ -20,8 +22,21 @@ import { ApiPurchasesModule } from "./purchase/purchase.module";
         JWT_EXPIRES_IN: Joi.string().required(),
       }),
     }),
+    ThrottlerModule.forRoot([
+      {
+        limit: 1000,
+        ttl: seconds(60)
+      }
+    ]),
     ApiAuthModule,
     ApiPurchasesModule
   ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard
+    }
+  ],
 })
 export class ApiModule { }
+

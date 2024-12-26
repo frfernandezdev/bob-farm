@@ -5,6 +5,13 @@ import { ResponsePaginatorDTO } from "@/src/contexts/shared/infrastructure/respo
 import { ResponseDTO } from "@/src/contexts/shared/infrastructure/response/response.dto";
 
 export class PurchaseResponse {
+  @ApiResponseProperty()
+  @Expose()
+  readonly id: string;
+
+  @ApiResponseProperty()
+  @Expose()
+  readonly purchase_time: string;
 }
 
 export class PurchaseResponseDTO extends ResponseDTO {

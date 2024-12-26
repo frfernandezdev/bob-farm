@@ -7,16 +7,18 @@ export class AuthLogoutService {
   constructor(private readonly repositorySession: AuthSessionRepository) { }
 
   async logout(userId: number, token: string) {
-    await this.repositorySession.delete({
+    console.log(userId, token);
+    await this.repositorySession.update({
       userId,
       token,
-    });
+    }, { disabled: true });
+
     const expiresIn = new Date();
-    await this.repositorySession.deleteMany({
+    await this.repositorySession.updateMany({
       userId,
       expiresAt: {
         lt: expiresIn.toISOString(),
       },
-    });
+    }, { disabled: true });
   }
 }

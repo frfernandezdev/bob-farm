@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "jsx": "preserve",
     "strict": true,
     "noEmit": true,
@@ -27,7 +28,21 @@
     "types": [
       "jest",
       "node"
-    ]
+    ],
+    "paths": {
+      "@app/*": [
+        "./src/app/*"
+      ],
+      "@modules/*": [
+        "./src/modules/*"
+      ],
+      "@shadcn/*": [
+        "./src/modules/shared/infrastructure/shadcn/*"
+      ],
+      "@/*": [
+        "./src/*"
+      ],
+    }
   },
   "include": [
     "**/*.ts",

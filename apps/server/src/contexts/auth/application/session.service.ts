@@ -6,6 +6,6 @@ export class AuthSessionService {
   constructor(private readonly repository: AuthSessionRepository) { }
 
   findByToken(token: string) {
-    return this.repository.findUnique({ token });
+    return this.repository.findUnique({ token, disabled: false });
   }
 }

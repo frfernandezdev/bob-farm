@@ -9,14 +9,14 @@ export class ExpireTokenCron {
 
   constructor(private readonly repository: AuthSessionRepository) { }
 
-  @Cron(CronExpression.EVERY_MINUTE)
+  @Cron(CronExpression.EVERY_HOUR)
   async handleCron() {
     const expiresIn = new Date();
     this.logger.debug("Called every 60 seconds" + expiresIn);
-    await this.repository.deleteMany({
+    await this.repository.updateMany({
       expiresAt: {
         lt: expiresIn,
       },
-    });
+    }, { disabled: true });
   }
 }
