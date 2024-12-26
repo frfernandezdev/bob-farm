@@ -24,10 +24,4 @@ export class RegisterDTO {
     message: "Password have max length of 8 characters",
   })
   readonly password: string;
-
-  @IsOptional()
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty()
-  readonly role: string;
 }

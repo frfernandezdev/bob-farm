@@ -9,10 +9,11 @@ import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 import { ApiModule } from './apps/api/api.module';
+import { ThrottlerExceptionFilter } from './contexts/shared/infrastructure/exceptions/throttler.exception';
 
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(ApiModule, new FastifyAdapter());
+  const app = await NestFactory.create<NestFastifyApplication>(ApiModule, new FastifyAdapter({ trustProxy: true }));
 
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
@@ -37,6 +38,8 @@ async function bootstrap() {
   app.enableVersioning({
     type: VersioningType.URI,
   });
+
+  app.useGlobalFilters(new ThrottlerExceptionFilter);
 
   await app.listen(port);
 

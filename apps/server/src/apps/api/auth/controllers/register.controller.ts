@@ -1,3 +1,4 @@
+import type { Request } from "express";
 import {
   Body,
   Controller,
@@ -5,6 +6,7 @@ import {
   Inject,
   Logger,
   Post,
+  Req,
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 
@@ -27,9 +29,9 @@ export class ApiAuthRegisterController {
 
   @Post()
   @HttpCode(200)
-  async handle(@Body() payload: RegisterDTO) {
+  async handle(@Req() req: Request, @Body() payload: RegisterDTO) {
     return AuthResponseDTO.make({
-      result: await this.service.register(payload),
+      result: await this.service.register(payload, req.ip),
     });
   }
 }

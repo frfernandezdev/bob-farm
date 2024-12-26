@@ -15,6 +15,7 @@ import { AuthSessionRepository } from "./infrastructure/persistence/prisma/sessi
 import { AuthUserRepository } from "./infrastructure/persistence/prisma/user.repository";
 import { JwtStrategy } from "./infrastructure/strategies/jwt.strategy";
 import { LocalStrategy } from "./infrastructure/strategies/local.strategy";
+import { AuthSessionService } from "./application/session.service";
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { LocalStrategy } from "./infrastructure/strategies/local.strategy";
     AuthLogoutService,
     AuthValidateService,
     AuthUserService,
+    AuthSessionService,
     ExpireTokenCron,
   ],
   exports: [
@@ -52,6 +54,7 @@ import { LocalStrategy } from "./infrastructure/strategies/local.strategy";
     AuthLogoutService,
     AuthValidateService,
     AuthUserService,
+    AuthSessionService
   ],
 })
 export class AuthModule { }

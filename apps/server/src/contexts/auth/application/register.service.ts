@@ -20,7 +20,7 @@ export class AuthRegisterService {
     name,
     email,
     password,
-  }: Pick<Prisma.UserCreateInput, "name" | "email" | "password">) {
+  }: Pick<Prisma.UserCreateInput, "name" | "email" | "password">, ip: string) {
     await this.alreadyExists(email);
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -43,6 +43,7 @@ export class AuthRegisterService {
           id: user.id,
         },
       },
+      ip,
       token,
       expiresAt: expiredAt.toISOString(),
     });

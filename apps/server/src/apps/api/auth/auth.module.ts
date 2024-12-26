@@ -7,9 +7,11 @@ import { ApiAuthLoginController } from "./controllers/login.controller";
 import { ApiAuthLogoutController } from "./controllers/logout.controller";
 import { ApiAuthRegisterController } from "./controllers/register.controller";
 import { ApiAuthUserController } from "./controllers/user.controller";
+import { LoggerModule } from "@/src/contexts/shared/infrastructure/logger/logger.module";
 
 @Module({
   imports: [
+    LoggerModule,
     AuthModule,
     RouterModule.register([
       {

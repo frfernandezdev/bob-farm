@@ -4,6 +4,7 @@ import Joi from "joi";
 
 import { LoggerModule } from "@/shared/infrastructure/logger/logger.module";
 import { ApiAuthModule } from "./auth/auth.module";
+import { ApiPurchasesModule } from "./purchase/purchase.module";
 
 @Module({
   imports: [
@@ -14,13 +15,13 @@ import { ApiAuthModule } from "./auth/auth.module";
       validationSchema: Joi.object({
         PORT: Joi.number().required(),
         DATABASE_URL: Joi.string().required(),
+        LOGGER_LEVEL: Joi.string().required(),
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRES_IN: Joi.string().required(),
-        HEDERA_OPERATOR_ID: Joi.string().required(),
-        HEDERA_OPERATOR_KEY: Joi.string().required(),
       }),
     }),
-    ApiAuthModule
+    ApiAuthModule,
+    ApiPurchasesModule
   ],
 })
 export class ApiModule { }

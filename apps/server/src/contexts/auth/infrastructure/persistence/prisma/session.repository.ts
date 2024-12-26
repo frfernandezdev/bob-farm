@@ -7,6 +7,10 @@ import { PrismaClient } from "@/src/contexts/shared/infrastructure/persistence/p
 export class AuthSessionRepository {
   constructor(private readonly prisma: PrismaClient) { }
 
+  findUnique(criteria: Prisma.SessionWhereUniqueInput) {
+    return this.prisma.session.findUnique({ where: criteria });
+  }
+
   create(data: Prisma.SessionCreateInput) {
     return this.prisma.session.create({ data });
   }

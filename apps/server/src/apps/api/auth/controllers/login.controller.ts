@@ -36,7 +36,7 @@ export class ApiAuthLoginController {
   async handle(@Req() req: Request, @Body() payload: LoginDTO) {
     payload;
     return AuthResponseDTO.make({
-      result: await this.service.login(req.user),
+      result: await this.service.login(req.user, req.ip),
     });
   }
 }
