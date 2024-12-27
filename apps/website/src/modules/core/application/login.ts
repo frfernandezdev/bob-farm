@@ -2,10 +2,10 @@ import { setCookie } from "cookies-next/client";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { Dispatch, SetStateAction } from "react";
 
-console.log(process.env);
 
 export const login = (setUser: Dispatch<SetStateAction<User | null>>, router: AppRouterInstance) => async (email: string, password: string) => {
   try {
+    console.log(process.env);
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
       method: 'POST',
       headers: {
