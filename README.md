@@ -1,82 +1,130 @@
-# BobFarm
+<h1 align="center">Bob Farm</h1>
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+<p align="center">
+  <a href="https://nodejs.org/docs/latest-v20.x/api/index.html"><img src="https://img.shields.io/badge/node-20.x-green.svg" alt="node"/></a>
+  <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/typescript-5.x-blue.svg" alt="typescript"/></a>
+  <a href="https://docs.nestjs.com/v10/"><img src="https://img.shields.io/badge/npm-10.x-red.svg" alt="npm"/></a>
+  <a href="https://fastify.dev/"><img src="https://img.shields.io/badge/Web_Framework-Fastify_⚡-black.svg" alt="fastify"/></a>
+  <a href="https://swc.rs/"><img src="https://img.shields.io/badge/Compiler-SWC_-orange.svg" alt="swc"/></a>
+  <a href="https://vitest.dev/"><img src="https://img.shields.io/badge/Test-Vitest_-yellow.svg" alt="swc"/></a>
+  <a href="https://www.docker.com/"><img src="https://img.shields.io/badge/Dockerized 🐳_-blue.svg" alt="docker"/></a>
+</p>
+<p align="center">
+  <a href="https://eventual-latrina-mindstartups-7bf1969e.koyeb.app/api/docs" target="_blank"><strong>DEMO Backend</strong></a>
+  <a href="https://bob-farm.vercel.app/login" target="_blank"><strong>DEMO Website</strong></a>
+</p>
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## 🚀 Technologies Used
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/next?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+- **[Node.js](https://nodejs.org/docs/latest-v20.x/api/index.html)**: JavaScript runtime environment for backend development.  
+- **[NestJS](https://docs.nestjs.com/v10/)**: A progressive Node.js framework for building efficient and scalable server-side applications.  
+- **[NX](https://nx.dev/)**: A powerful build system with a modern monorepo approach.  
+- **[TypeScript](https://www.typescriptlang.org/)**: Enhances JavaScript with static typing and modern features.  
+- **[Prisma](https://www.prisma.io/)**: A modern ORM for database schema management and queries.  
+- **[SWC](https://swc.rs/)**: Super-fast JavaScript and TypeScript compiler.  
+- **[Docker](https://www.docker.com/)**: Containerization for consistent and portable environments.  
 
-## Finish your CI setup
+## 🛠️ Project Structure
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/tePWqNZrlJ)
+This project is a monorepo managed with NX and consists of two applications:  
 
+1. **Server**: A NestJS-based backend application for managing APIs and data.  
+2. **Website**: A frontend web application deployed on Vercel.  
 
-## Run tasks
+## 🛠️ Prerequisites
 
-To run the dev server for your app, use:
+Ensure you have the following installed:  
 
-```sh
-npx nx dev website 
-```
+- **[Node.js](https://nodejs.org/en/download/)**: JavaScript runtime environment.  
+- **[Docker](https://docs.docker.com/get-docker/)**: For containerized development.  
+- **[Git](https://git-scm.com/downloads)**: Version control system.  
 
-To create a production bundle:
+## 🧑‍💻 Development Setup
 
-```sh
-npx nx build website 
-```
+1. **Clone the repository**:  
 
-To see all available targets to run for a project, run:
+```bash
+git clone https://github.com/frfernandezdev/bob-farm.git  
+cd bob-farm  
+```  
 
-```sh
-npx nx show project website 
-```
+2. **Create a `.env` file**:  
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+```bash
+cp .env.example .env  
+```  
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+3. **Install dependencies using PNPM**:  
 
-## Add new projects
+```bash
+pnpm install  
+```  
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+4. **Start the development environment**:  
+   - **Server**:  
 
-Use the plugin's generator to create new projects.
+   ```bash
+   nx run server:serve:development  
+   ```  
 
-To generate a new application, use:
+   - **Website**:  
 
-```sh
-npx nx g @nx/next:app demo
-```
+   ```bash
+   nx run website:dev  
+   ```
+   
+5. **Stop the environment**:  
 
-To generate a new library, use:
+```bash
+nx stop  
+```  
 
-```sh
-npx nx g @nx/react:lib mylib
-```
+## 📦 Database Service
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+This project uses a PostgreSQL database service defined in `docker-compose.yml` with the service name `pgsql`. Ensure Docker is running, then start the service with:  
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+```bash
+docker-compose up -d pgsql  
+```  
 
+## ⚙️ Building the Project
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+To compile the applications, run:  
 
-## Install Nx Console
+- **Server**:  
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+```bash
+nx build server  
+```  
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- **Website**:  
 
-## Useful links
+```bash
+nx build website  
+```  
 
-Learn more:
+## 📦 Database Migration
 
-- [Learn more about this workspace setup](https://nx.dev/nx-api/next?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+1. **Generate Prisma client**:  
 
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+```bash
+nx server:generate  
+```  
+
+2. **Apply migrations**:  
+
+```bash
+nx server:migrate:dev  
+```  
+
+## 🚢 Deployment
+
+This project supports deployment to both [Koyeb](https://www.koyeb.com/) and [Vercel](https://vercel.com/):  
+
+### Deploying to Koyeb
+
+The **server** is deployed to Koyeb. Changes pushed to the `main` branch trigger a build and deploy pipeline on Koyeb. Access the production environment via the provided Koyeb URL.  
+
+### Deploying to Vercel
+
+The **website** is deployed to Vercel. For further information, visit the [Vercel Documentation](https://vercel.com/docs).  
