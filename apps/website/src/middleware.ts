@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { getCookie } from 'cookies-next/server'
+import { deleteCookie, getCookie } from 'cookies-next/server'
 
 export async function middleware(request: NextRequest) {
   const token = await getCookie('token', { req: request });
@@ -37,6 +37,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/purchase', request.url))
   } catch (error) {
     console.error('Error al verificar el token:', error)
+    deleteCookie('token', { req: request });
     return NextResponse.redirect(new URL('/login', request.url))
   }
 }
