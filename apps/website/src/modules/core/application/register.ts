@@ -19,13 +19,7 @@ export const register = (setUser: Dispatch<SetStateAction<User | null>>, router:
     const { result } = await response.json()
     const { access_token } = result
     setUser({ name, email, token: access_token })
-    setCookie('token', access_token, {
-      httpOnly: process.env.NODE_ENV === 'production',
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: 60 * 60, // 1 hora
-      path: '/',
-      sameSite: 'strict',
-    })
+    setCookie('token', access_token)
     router.push('/purchase')
   } catch (error) {
     console.error('Error durante el registro:', error)
