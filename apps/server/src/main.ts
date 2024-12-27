@@ -70,7 +70,7 @@ async function bootstrap() {
     permittedCrossDomainPolicies: true,
   });
 
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
 
   const logger = app.get(Logger);
   logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
