@@ -7,7 +7,12 @@ export async function middleware(request: NextRequest) {
 
   const protectedPaths = ['/purchase']
 
+
   if (!token) {
+    if (request.nextUrl.pathname === '/') {
+      return NextResponse.redirect(new URL('/login', request.url))
+    }
+
     if (!protectedPaths.some(path => request.nextUrl.pathname.startsWith(path))) {
       return NextResponse.next();
     }
