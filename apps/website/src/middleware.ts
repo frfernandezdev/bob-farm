@@ -37,8 +37,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/purchase', request.url))
   } catch (error) {
     console.error('Error al verificar el token:', error)
-    deleteCookie('token', { req: request });
-    return NextResponse.redirect(new URL('/login', request.url))
+
+    if (request.nextUrl.pathname !== '/login') {
+      return NextResponse.redirect(new URL('/login', request.url))
+    }
   }
 }
 
